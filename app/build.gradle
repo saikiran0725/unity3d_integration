@@ -1,0 +1,61 @@
+plugins {
+  id 'com.android.application'
+  id 'kotlin-android'
+}
+
+android {
+  compileSdkVersion 30
+  defaultConfig {
+    applicationId "timothypaetz.com.recyclersectionheader"
+    minSdkVersion 19
+    targetSdkVersion 30
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    ndk {
+      abiFilters 'armeabi-v7a', 'arm64-v8a'
+      //abiFilters 'armeabi-v7a', 'x86'
+    }
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+  lintOptions {
+    abortOnError false
+  }
+
+  aaptOptions {
+    ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
+  }
+  packagingOptions {
+    doNotStrip '*/armeabi-v7a/*.so'
+    doNotStrip '*/arm64-v8a/*.so'
+  }
+}
+
+dependencies {
+  //implementation project(':unityLibrary')
+  implementation fileTree(dir: project(':unityLibrary').getProjectDir().toString() + ('\\libs'), include: ['*.aar', '*.jar'])
+  //implementation fileTree(dir: project(':unityLibrary').getProjectDir().toString() + ('\\libs'), include: ['*.aar'])
+  //implementation files(dir: project(':unityLibrary').getProjectDir().toString() + ('\\libs') + '/UnityARCore.aar')
+  //implementation files(dir: project(':unityLibrary').getProjectDir().toString() + ('\\libs') + '/UnityARCore.aar')
+  //implementation(name: project(':unityLibrary').getProjectDir().toString() + ('\\libs'), ext: 'aar')
+
+
+  implementation 'androidx.appcompat:appcompat:1.2.0'
+  implementation 'androidx.recyclerview:recyclerview:1.2.0'
+  //implementation fileTree(dir: '/Users/ap/recycler_view_headers/unityLibrary/libs', include: ['*.aar', '*.jar'], exclude: [])
+
+  implementation 'com.google.android.gms:play-services-auth:17.0.0'
+  implementation 'com.google.android.gms:play-services-auth-api-phone:17.0.0'
+  implementation 'com.google.android.gms:play-services-identity:17.0.0'
+  implementation 'com.google.android.gms:play-services-base:17.3.0'
+
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+  androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+}

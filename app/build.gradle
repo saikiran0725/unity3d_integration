@@ -1,13 +1,11 @@
-plugins {
-  id 'com.android.application'
-  id 'kotlin-android'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
   compileSdkVersion 30
   defaultConfig {
     applicationId "timothypaetz.com.recyclersectionheader"
-    minSdkVersion 19
+    minSdkVersion 24
     targetSdkVersion 30
     versionCode 1
     versionName "1.0"
@@ -29,8 +27,10 @@ android {
   }
 
   aaptOptions {
+    noCompress = ['.ress', '.resource', '.obb'] + unityStreamingAssets.tokenize(', ')
     ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
   }
+
   packagingOptions {
     doNotStrip '*/armeabi-v7a/*.so'
     doNotStrip '*/arm64-v8a/*.so'
@@ -38,7 +38,7 @@ android {
 }
 
 dependencies {
-  //implementation project(':unityLibrary')
+  implementation project(':unityLibrary')
   implementation fileTree(dir: project(':unityLibrary').getProjectDir().toString() + ('\\libs'), include: ['*.aar', '*.jar'])
   //implementation fileTree(dir: project(':unityLibrary').getProjectDir().toString() + ('\\libs'), include: ['*.aar'])
   //implementation files(dir: project(':unityLibrary').getProjectDir().toString() + ('\\libs') + '/UnityARCore.aar')
